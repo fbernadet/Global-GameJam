@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://c56vtodxoxuvc"]
+[gd_scene load_steps=6 format=3 uid="uid://c56vtodxoxuvc"]
 
 [ext_resource type="PackedScene" uid="uid://6tshwktv4jo4" path="res://Scenes/player.tscn" id="1_h8dg8"]
 [ext_resource type="Texture2D" uid="uid://0875sunqs6hn" path="res://Tilemap/tilemap.png" id="2_oeaf8"]
+[ext_resource type="PackedScene" uid="uid://bopqga6hgsgg8" path="res://Scenes/clown.tscn" id="3_vdkva"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lc4tu"]
 texture = ExtResource("2_oeaf8")
@@ -380,3 +381,12 @@ position = Vector2(41, 34)
 tile_set = SubResource("TileSet_04ujd")
 format = 2
 layer_0/tile_data = PackedInt32Array(196613, 65536, 12, 196614, 65536, 12, 262150, 65536, 12, 262151, 65536, 12, 327686, 65536, 12, 327685, 65536, 12, 262149, 65536, 12, 196615, 65536, 12, 196616, 65536, 12, 262152, 65536, 12, 327687, 65536, 12, 393222, 65536, 12, 393221, 65536, 12, 327688, 65536, 12, 393225, 65536, 12, 393226, 65536, 12, 393224, 65536, 12)
+
+[node name="Clown" parent="." instance=ExtResource("3_vdkva")]
+position = Vector2(48, 76)
+
+[node name="Clown2" parent="." instance=ExtResource("3_vdkva")]
+position = Vector2(-18, 66)
+
+[node name="Clown3" parent="." instance=ExtResource("3_vdkva")]
+position = Vector2(114, 17)

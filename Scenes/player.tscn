@@ -9,7 +9,7 @@ size = Vector2(8, 8)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4tddr"]
 size = Vector2(6, 8)
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_svfv4")
 
 [node name="PlayerShape" type="CollisionShape2D" parent="."]
