@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://6tshwktv4jo4"]
+[gd_scene load_steps=9 format=3 uid="uid://6tshwktv4jo4"]
 
 [ext_resource type="Texture2D" uid="uid://ct45oq3kloetw" path="res://Tiles/tile_0331.png" id="1_iloft"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_svfv4"]
+[ext_resource type="Script" path="res://Scripts/HealthComponent.gd" id="2_r5ydn"]
 [ext_resource type="Script" path="res://Scripts/CenterMarker.gd" id="3_kvhq2"]
 [ext_resource type="Texture2D" uid="uid://tujak7ibid8u" path="res://Tiles/tile_0330.png" id="3_y5igb"]
 
@@ -16,6 +17,9 @@ size = Vector2(2, 6)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_svfv4")
+
+[node name="HealthComponent" type="Node2D" parent="."]
+script = ExtResource("2_r5ydn")
 
 [node name="PlayerShape" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_tfvgx")
