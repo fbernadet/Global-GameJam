@@ -42,8 +42,6 @@ func spawn_enemy_at_camera_edge():
 	var enemy = clown.instantiate(PackedScene.GEN_EDIT_STATE_MAIN)
 	enemy.global_position = spawn_position
 	add_child(enemy)
-	
-
 
 func _on_timer_timeout():
 	spawn_enemy_at_camera_edge()

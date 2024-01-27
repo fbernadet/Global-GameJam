@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://6tshwktv4jo4"]
+[gd_scene load_steps=18 format=3 uid="uid://6tshwktv4jo4"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_svfv4"]
 [ext_resource type="Script" path="res://Scripts/HealthComponent.gd" id="2_r5ydn"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://mucs0gc5mk8x" path="res://Tiles/Bros/bro_arriere_move_1.png" id="7_o7qw8"]
 [ext_resource type="Texture2D" uid="uid://nfxna5lbsmrw" path="res://Tiles/Bros/bro_avant_move_2.png" id="7_o08mr"]
 [ext_resource type="Texture2D" uid="uid://cm1yjkf7ybcva" path="res://Tiles/Bros/bro_arriere_move_2.png" id="8_h6ev8"]
+[ext_resource type="Texture2D" uid="uid://k4h57piflql6" path="res://Tiles/progress/ohSpQzs.jpg" id="9_xlgc5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tfvgx"]
 size = Vector2(8, 8)
@@ -54,6 +55,13 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4tddr"]
 size = Vector2(6, 8)
 
+[sub_resource type="Curve" id="Curve_3g5ks"]
+_data = [Vector2(0.668478, 0.197802), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="CurveTexture" id="CurveTexture_xq1dw"]
+curve = SubResource("Curve_3g5ks")
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8wryj"]
 size = Vector2(2, 6)
 
@@ -86,6 +94,25 @@ debug_color = Color(0.976471, 0.129412, 0.188235, 0.419608)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(5, 5)
+
+[node name="Label" type="Label" parent="Camera2D"]
+offset_left = -114.0
+offset_top = -65.0
+offset_right = -66.0
+offset_bottom = -51.0
+theme_override_font_sizes/font_size = 10
+text = "Day 1"
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="Camera2D"]
+offset_left = -60.0
+offset_top = 57.0
+offset_right = 61.0
+offset_bottom = 63.0
+value = 100.0
+rounded = true
+nine_patch_stretch = true
+texture_under = ExtResource("9_xlgc5")
+texture_progress = SubResource("CurveTexture_xq1dw")
 
 [node name="CenterMarker" type="Marker2D" parent="."]
 script = ExtResource("3_kvhq2")
