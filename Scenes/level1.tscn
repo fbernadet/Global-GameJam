@@ -1,11 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://dtwwwda6vfjko"]
+[gd_scene load_steps=7 format=3 uid="uid://dtwwwda6vfjko"]
 
 [ext_resource type="PackedScene" uid="uid://drv10itu2b043" path="res://Scenes/tile_map.tscn" id="1_f8tar"]
 [ext_resource type="Script" path="res://Scripts/GameLogic.gd" id="1_porm0"]
 [ext_resource type="PackedScene" uid="uid://6tshwktv4jo4" path="res://Scenes/player.tscn" id="2_lgkyn"]
+[ext_resource type="Shader" path="res://Shader/level1.gdshader" id="4_5kork"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vonj5"]
 size = Vector2(56, 20.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5krcb"]
+shader = ExtResource("4_5kork")
+shader_parameter/hp_percent = null
 
 [node name="Level1" type="Node2D"]
 
@@ -31,5 +36,13 @@ debug_color = Color(0.619608, 0.533333, 0, 0.419608)
 [node name="Start" type="Marker2D" parent="."]
 position = Vector2(148, 638)
 
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_5krcb")
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 1154.0
+offset_bottom = 647.0
+
 [connection signal="timeout" from="GameLogic/Timer" to="GameLogic" method="_on_timer_timeout"]
+[connection signal="damage_taken_relay" from="Player" to="GameLogic" method="_on_player_damage_taken_relay"]
 [connection signal="body_entered" from="Goal" to="GameLogic" method="_on_goal_body_entered"]

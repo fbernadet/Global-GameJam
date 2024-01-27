@@ -5,6 +5,8 @@ extends CharacterBody2D
 const speed = 100.0
 const friction = 0.35
 
+signal damage_taken_relay(hp)
+
 func _ready():
 	game_over_label.visible = false
 
@@ -48,3 +50,6 @@ func _on_health_component_is_dead():
 	game_over_label.visible = true
 	get_tree().paused = true
 	print("YOU DIED")
+
+func _on_health_component_damage_taken(hp):
+	emit_signal("damage_taken_relay", hp)

@@ -141,6 +141,7 @@ texture = ExtResource("3_y5igb")
 shape = SubResource("RectangleShape2D_8wryj")
 debug_color = Color(0.866667, 0, 0.854902, 0.419608)
 
+[connection signal="damage_taken" from="HealthComponent" to="." method="_on_health_component_damage_taken"]
 [connection signal="is_dead" from="HealthComponent" to="." method="_on_health_component_is_dead"]
 [connection signal="area_entered" from="Hurtbox" to="HealthComponent" method="_on_hurtbox_area_entered"]
 [connection signal="body_entered" from="CenterMarker/Briefcase" to="." method="_on_briefcase_body_entered"]

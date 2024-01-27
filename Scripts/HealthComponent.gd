@@ -7,6 +7,7 @@ class_name HealthComponent
 var parent
 
 signal is_dead
+signal damage_taken(hp)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -20,6 +21,7 @@ func take_damage(dmg : int):
 	health -= dmg
 	print("Took damage :", dmg )
 	update_bar()
+	emit_signal("damage_taken", health)
 	if health<=0:
 		# logique de mort
 		emit_signal("is_dead")

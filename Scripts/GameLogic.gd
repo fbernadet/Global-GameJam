@@ -3,13 +3,19 @@ extends Node2D
 @onready var player = $"../Player"
 @onready var goal = $"../Goal"
 @onready var start = $"../Start"
+@onready var colorRect = $"../ColorRect"
 @onready var clown = preload("res://Scenes/clown.tscn")
 var day = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	change_filter_value(1)
 	player.position = start.global_position
 	update_day_label()
+	
+func change_filter_value(value : float):
+	var shader = colorRect.material as ShaderMaterial
+	shader.set_shader_parameter("hp_percent", value)
 
 func get_day_label():
 	var camera = player.get_node("Camera2D")
@@ -55,3 +61,12 @@ func spawn_enemy_at_camera_edge():
 
 func _on_timer_timeout():
 	spawn_enemy_at_camera_edge()
+	
+func _on_damage_taken():
+	pass
+
+
+func _on_player_damage_taken_relay(hp):
+	var hp_value = float(hp)/100.
+	print(hp_value)
+	change_filter_value(hp_value)
