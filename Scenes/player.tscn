@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=3 uid="uid://6tshwktv4jo4"]
 
-[ext_resource type="Texture2D" uid="uid://ct45oq3kloetw" path="res://Tiles/tile_0331.png" id="1_iloft"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_svfv4"]
 [ext_resource type="Script" path="res://Scripts/HealthComponent.gd" id="2_r5ydn"]
 [ext_resource type="Script" path="res://Scripts/CenterMarker.gd" id="3_kvhq2"]
+[ext_resource type="Texture2D" uid="uid://dbvpd3k0yeciu" path="res://Tiles/Bros/bro_avant.png" id="3_w0yn8"]
 [ext_resource type="Texture2D" uid="uid://tujak7ibid8u" path="res://Tiles/tile_0330.png" id="3_y5igb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tfvgx"]
@@ -24,8 +24,9 @@ script = ExtResource("2_r5ydn")
 [node name="PlayerShape" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_tfvgx")
 
-[node name="Tile0331" type="Sprite2D" parent="."]
-texture = ExtResource("1_iloft")
+[node name="BroAvant" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_w0yn8")
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 0
