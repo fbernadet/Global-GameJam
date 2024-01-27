@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dl0563f2xtwcn"
-path="res://.godot/imported/DALL·E 2024-01-26 23.29.00 - can you make me a clown van in 2d for a tilemap 16x16 pixeled(1).png-53b969f8ad0786b738c3c19618c2b1f6.ctex"
+uid="uid://humshixo3a0p"
+path="res://.godot/imported/fleur_clown.png-e010df525e90df0443172a7392641d8c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Tilemap/DALL·E 2024-01-26 23.29.00 - can you make me a clown van in 2d for a tilemap 16x16 pixeled(1).png"
-dest_files=["res://.godot/imported/DALL·E 2024-01-26 23.29.00 - can you make me a clown van in 2d for a tilemap 16x16 pixeled(1).png-53b969f8ad0786b738c3c19618c2b1f6.ctex"]
+source_file="res://Tilemap/fleur_clown.png"
+dest_files=["res://.godot/imported/fleur_clown.png-e010df525e90df0443172a7392641d8c.ctex"]
 
 [params]
 

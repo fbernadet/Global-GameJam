@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://6tshwktv4jo4"]
+[gd_scene load_steps=19 format=3 uid="uid://6tshwktv4jo4"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_svfv4"]
 [ext_resource type="Script" path="res://Scripts/HealthComponent.gd" id="2_r5ydn"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://nfxna5lbsmrw" path="res://Tiles/Bros/bro_avant_move_2.png" id="7_o08mr"]
 [ext_resource type="Texture2D" uid="uid://cm1yjkf7ybcva" path="res://Tiles/Bros/bro_arriere_move_2.png" id="8_h6ev8"]
 [ext_resource type="Texture2D" uid="uid://k4h57piflql6" path="res://Tiles/progress/ohSpQzs.jpg" id="9_xlgc5"]
+[ext_resource type="PackedScene" uid="uid://npuwybt6ea8k" path="res://Scenes/fleur_bonus.tscn" id="11_mctdj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tfvgx"]
 size = Vector2(8, 8)
@@ -116,6 +117,9 @@ texture_progress = SubResource("CurveTexture_xq1dw")
 
 [node name="CenterMarker" type="Marker2D" parent="."]
 script = ExtResource("3_kvhq2")
+
+[node name="FleurBonus" parent="CenterMarker" instance=ExtResource("11_mctdj")]
+position = Vector2(7, 0)
 
 [node name="Briefcase" type="Area2D" parent="CenterMarker"]
 position = Vector2(5, 0)

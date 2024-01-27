@@ -1,13 +1,13 @@
 [gd_scene load_steps=4 format=3 uid="uid://cqfk7gph070ed"]
 
-[ext_resource type="Script" path="res://Scripts/van.gd" id="1_g4b3p"]
-[ext_resource type="Texture2D" uid="uid://o3ae23k5ajlr" path="res://Tilemap/DALL·E 2024-01-26 23.29.00 - can you make me a clown van in 2d for a tilemap 16x16 pixeled(1).png" id="1_xfkml"]
+[ext_resource type="Script" path="res://Scripts/clown.gd" id="1_6xec0"]
+[ext_resource type="Texture2D" uid="uid://cxnspfwauthg8" path="res://Tilemap/Van clown.png" id="2_b4873"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rgn57"]
 size = Vector2(568.888, 515.555)
 
 [node name="Van" type="CharacterBody2D"]
-script = ExtResource("1_g4b3p")
+script = ExtResource("1_6xec0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)
@@ -17,7 +17,7 @@ shape = SubResource("RectangleShape2D_rgn57")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-3.8147e-06, 1)
 scale = Vector2(0.1, 0.090625)
-texture = ExtResource("1_xfkml")
+texture = ExtResource("2_b4873")
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true
