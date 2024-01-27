@@ -96,7 +96,7 @@ debug_color = Color(0.976471, 0.129412, 0.188235, 0.419608)
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(5, 5)
 
-[node name="Label" type="Label" parent="Camera2D"]
+[node name="DayLabel" type="Label" parent="Camera2D"]
 offset_left = -114.0
 offset_top = -65.0
 offset_right = -66.0
@@ -114,6 +114,13 @@ rounded = true
 nine_patch_stretch = true
 texture_under = ExtResource("9_xlgc5")
 texture_progress = SubResource("CurveTexture_xq1dw")
+
+[node name="GameOverLabel" type="RichTextLabel" parent="Camera2D"]
+offset_left = -33.0
+offset_top = -44.0
+offset_right = 86.0
+offset_bottom = 13.0
+text = "You got clowned"
 
 [node name="CenterMarker" type="Marker2D" parent="."]
 script = ExtResource("3_kvhq2")
@@ -134,4 +141,6 @@ texture = ExtResource("3_y5igb")
 shape = SubResource("RectangleShape2D_8wryj")
 debug_color = Color(0.866667, 0, 0.854902, 0.419608)
 
+[connection signal="is_dead" from="HealthComponent" to="." method="_on_health_component_is_dead"]
+[connection signal="area_entered" from="Hurtbox" to="HealthComponent" method="_on_hurtbox_area_entered"]
 [connection signal="body_entered" from="CenterMarker/Briefcase" to="." method="_on_briefcase_body_entered"]

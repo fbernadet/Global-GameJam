@@ -2,19 +2,28 @@ extends Node2D
 
 @onready var player = $"../Player"
 @onready var goal = $"../Goal"
-@onready var start = $"../Start" 
+@onready var start = $"../Start"
 @onready var clown = preload("res://Scenes/clown.tscn")
 var day = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	player.position = start.global_position
+	update_day_label()
 
+func get_day_label():
+	var camera = player.get_node("Camera2D")
+	if camera and camera.has_node("DayLabel"):
+		var daylabel = camera.get_node("DayLabel")
+		return daylabel
+
+func update_day_label():
+	var day_label = get_day_label()
+	day_label.text = "Day "+str(day)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta):
 	pass
-
 
 func _on_goal_body_entered(body):
 	if body.is_in_group("player"):
@@ -28,6 +37,7 @@ func next_day():
 	# TODO transition un peu smooth pour le jour suivant
 	player.position = start.position
 	day += 1
+	update_day_label()
 	print("jour = ", day)
 	
 func spawn_enemy_at_camera_edge():

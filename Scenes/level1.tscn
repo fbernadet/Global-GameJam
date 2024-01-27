@@ -9,14 +9,14 @@ size = Vector2(56, 20.5)
 
 [node name="Level1" type="Node2D"]
 
+[node name="TileMap" parent="." instance=ExtResource("1_f8tar")]
+
 [node name="GameLogic" type="Node2D" parent="."]
 script = ExtResource("1_porm0")
 
 [node name="Timer" type="Timer" parent="GameLogic"]
 wait_time = 0.5
 autostart = true
-
-[node name="TileMap" parent="." instance=ExtResource("1_f8tar")]
 
 [node name="Player" parent="." instance=ExtResource("2_lgkyn")]
 position = Vector2(312, 442)

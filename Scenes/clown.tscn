@@ -1,13 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://bopqga6hgsgg8"]
+[gd_scene load_steps=7 format=3 uid="uid://bopqga6hgsgg8"]
 
 [ext_resource type="Texture2D" uid="uid://rphdlhwfeo7b" path="res://Tiles/tile_0307.png" id="1_jwcl4"]
 [ext_resource type="Script" path="res://Scripts/clown.gd" id="1_lljae"]
+[ext_resource type="Script" path="res://Scripts/HitBox.gd" id="3_12yq8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3s7k2"]
 size = Vector2(8, 8)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_umrsi"]
-size = Vector2(8, 8)
+size = Vector2(10, 10)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wk1om"]
 
@@ -24,11 +25,14 @@ texture = ExtResource("1_jwcl4")
 [node name="HitBox" type="Area2D" parent="."]
 collision_layer = 2
 collision_mask = 0
+script = ExtResource("3_12yq8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 shape = SubResource("RectangleShape2D_umrsi")
 
 [node name="DetectionZone" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionZone"]
 shape = SubResource("CircleShape2D_wk1om")

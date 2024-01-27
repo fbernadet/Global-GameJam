@@ -6,6 +6,8 @@ class_name HealthComponent
 @onready var progess_bar = $"../Camera2D/TextureProgressBar"
 var parent
 
+signal is_dead
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	update_bar()
@@ -20,4 +22,8 @@ func take_damage(dmg : int):
 	update_bar()
 	if health<=0:
 		# logique de mort
+		emit_signal("is_dead")
 		print("mort")
+
+func _on_hurtbox_area_entered(area : Hitbox):
+	take_damage(area.damage)

@@ -1,8 +1,12 @@
 class_name Player
 extends CharacterBody2D
 @onready var _animated_sprite = $AnimatedSprite2D
+@onready var game_over_label = $Camera2D/GameOverLabel
 const speed = 100.0
 const friction = 0.35
+
+func _ready():
+	game_over_label.visible = false
 
 func _physics_process(_delta):
 	var direction := Vector2(
@@ -38,3 +42,9 @@ func _on_briefcase_body_entered(body):
 	if not clown:
 		return
 	clown.bounce((clown.position - position).normalized())
+
+
+func _on_health_component_is_dead():
+	game_over_label.visible = true
+	get_tree().paused = true
+	print("YOU DIED")
