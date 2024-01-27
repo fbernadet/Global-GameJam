@@ -1,29 +1,80 @@
-[gd_scene load_steps=5 format=3 uid="uid://6tshwktv4jo4"]
+[gd_scene load_steps=15 format=3 uid="uid://6tshwktv4jo4"]
 
-[ext_resource type="Texture2D" uid="uid://ct45oq3kloetw" path="res://Tiles/tile_0331.png" id="1_iloft"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_svfv4"]
 [ext_resource type="Script" path="res://Scripts/HealthComponent.gd" id="2_r5ydn"]
 [ext_resource type="Script" path="res://Scripts/CenterMarker.gd" id="3_kvhq2"]
 [ext_resource type="Texture2D" uid="uid://dbvpd3k0yeciu" path="res://Tiles/Bros/bro_avant.png" id="3_w0yn8"]
 [ext_resource type="Texture2D" uid="uid://tujak7ibid8u" path="res://Tiles/tile_0330.png" id="3_y5igb"]
+[ext_resource type="Texture2D" uid="uid://dsvcifok6f57b" path="res://Tiles/Bros/bro_arriere.png" id="6_d73k8"]
+[ext_resource type="Texture2D" uid="uid://xbnfdd7wf8ob" path="res://Tiles/Bros/bro_avant_move_1.png" id="6_qf2lj"]
+[ext_resource type="Texture2D" uid="uid://mucs0gc5mk8x" path="res://Tiles/Bros/bro_arriere_move_1.png" id="7_o7qw8"]
+[ext_resource type="Texture2D" uid="uid://nfxna5lbsmrw" path="res://Tiles/Bros/bro_avant_move_2.png" id="7_o08mr"]
+[ext_resource type="Texture2D" uid="uid://cm1yjkf7ybcva" path="res://Tiles/Bros/bro_arriere_move_2.png" id="8_h6ev8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tfvgx"]
 size = Vector2(8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qq1lm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_d73k8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_o7qw8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_d73k8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_h6ev8")
+}],
+"loop": true,
+"name": &"run_arriere",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_w0yn8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_qf2lj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_w0yn8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_o08mr")
+}],
+"loop": true,
+"name": &"run_avant",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4tddr"]
 size = Vector2(6, 8)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8wryj"]
-size = Vector2(5, 6)
+size = Vector2(2, 6)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_svfv4")
 
+[node name="HealthComponent" type="Node2D" parent="."]
+script = ExtResource("2_r5ydn")
+
 [node name="PlayerShape" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_tfvgx")
 
-[node name="Tile0331" type="Sprite2D" parent="."]
-texture = ExtResource("1_iloft")
+[node name="BroAvant" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_w0yn8")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_qq1lm")
+animation = &"run_avant"
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 0
@@ -34,7 +85,7 @@ shape = SubResource("RectangleShape2D_4tddr")
 debug_color = Color(0.976471, 0.129412, 0.188235, 0.419608)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(4, 4)
+zoom = Vector2(5, 5)
 
 [node name="CenterMarker" type="Marker2D" parent="."]
 script = ExtResource("3_kvhq2")
