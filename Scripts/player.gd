@@ -32,3 +32,9 @@ func _process(_delta):
 		
 	if Input.is_action_pressed("ui_left") == false && Input.is_action_pressed("ui_right") == false && Input.is_action_pressed("ui_up") == false && Input.is_action_pressed("ui_down") == false:
 		_animated_sprite.stop()
+
+func _on_briefcase_body_entered(body):
+	var clown = body as Clown
+	if not clown:
+		return
+	clown.bounce((clown.position - position).normalized())

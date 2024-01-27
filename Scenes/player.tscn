@@ -120,7 +120,7 @@ script = ExtResource("3_kvhq2")
 [node name="Briefcase" type="Area2D" parent="CenterMarker"]
 position = Vector2(5, 0)
 collision_layer = 0
-collision_mask = 2
+collision_mask = 4
 
 [node name="BriefcaseSprite" type="Sprite2D" parent="CenterMarker/Briefcase"]
 scale = Vector2(0.3125, 0.625)
@@ -129,3 +129,5 @@ texture = ExtResource("3_y5igb")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CenterMarker/Briefcase"]
 shape = SubResource("RectangleShape2D_8wryj")
 debug_color = Color(0.866667, 0, 0.854902, 0.419608)
+
+[connection signal="body_entered" from="CenterMarker/Briefcase" to="." method="_on_briefcase_body_entered"]
