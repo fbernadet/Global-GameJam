@@ -1,11 +1,30 @@
-[gd_scene load_steps=3 format=3 uid="uid://dtwwwda6vfjko"]
+[gd_scene load_steps=5 format=3 uid="uid://dtwwwda6vfjko"]
 
 [ext_resource type="PackedScene" uid="uid://drv10itu2b043" path="res://Scenes/tile_map.tscn" id="1_f8tar"]
+[ext_resource type="Script" path="res://Scripts/GameLogic.gd" id="1_porm0"]
 [ext_resource type="PackedScene" uid="uid://6tshwktv4jo4" path="res://Scenes/player.tscn" id="2_lgkyn"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vonj5"]
+size = Vector2(56, 20.5)
+
 [node name="Level1" type="Node2D"]
+
+[node name="GameLogic" type="Node2D" parent="."]
+script = ExtResource("1_porm0")
 
 [node name="TileMap" parent="." instance=ExtResource("1_f8tar")]
 
 [node name="Player" parent="." instance=ExtResource("2_lgkyn")]
-position = Vector2(150, 618)
+position = Vector2(312, 442)
+
+[node name="Goal" type="Area2D" parent="."]
+position = Vector2(1060, 94)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Goal"]
+shape = SubResource("RectangleShape2D_vonj5")
+debug_color = Color(0.619608, 0.533333, 0, 0.419608)
+
+[node name="Start" type="Marker2D" parent="."]
+position = Vector2(148, 638)
+
+[connection signal="body_entered" from="Goal" to="GameLogic" method="_on_goal_body_entered"]
