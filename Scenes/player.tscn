@@ -34,7 +34,7 @@ shape = SubResource("RectangleShape2D_4tddr")
 debug_color = Color(0.976471, 0.129412, 0.188235, 0.419608)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(5, 5)
+zoom = Vector2(4, 4)
 
 [node name="CenterMarker" type="Marker2D" parent="."]
 script = ExtResource("3_kvhq2")

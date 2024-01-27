@@ -12,6 +12,10 @@ size = Vector2(56, 20.5)
 [node name="GameLogic" type="Node2D" parent="."]
 script = ExtResource("1_porm0")
 
+[node name="Timer" type="Timer" parent="GameLogic"]
+wait_time = 0.5
+autostart = true
+
 [node name="TileMap" parent="." instance=ExtResource("1_f8tar")]
 
 [node name="Player" parent="." instance=ExtResource("2_lgkyn")]
@@ -27,4 +31,5 @@ debug_color = Color(0.619608, 0.533333, 0, 0.419608)
 [node name="Start" type="Marker2D" parent="."]
 position = Vector2(148, 638)
 
+[connection signal="timeout" from="GameLogic/Timer" to="GameLogic" method="_on_timer_timeout"]
 [connection signal="body_entered" from="Goal" to="GameLogic" method="_on_goal_body_entered"]

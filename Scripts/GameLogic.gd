@@ -2,8 +2,8 @@ extends Node2D
 
 @onready var player = $"../Player"
 @onready var goal = $"../Goal"
-@onready var start = $"../Start"
-
+@onready var start = $"../Start" 
+@onready var clown = preload("res://Scenes/clown.tscn")
 var day = 0
 
 # Called when the node enters the scene tree for the first time.
@@ -29,3 +29,21 @@ func next_day():
 	player.position = start.position
 	day += 1
 	print("jour = ", day)
+	
+func spawn_enemy_at_camera_edge():
+	var camera = get_viewport().get_camera_2d()
+	var cam_pos = camera.global_position
+	var cam_size = camera.get_viewport_rect().size
+	
+	var spawn_position = cam_pos
+	spawn_position.x += randf_range(-cam_size.x / 2 - 50, cam_size.x / 2 + 50)
+	spawn_position.y += randf_range(-cam_size.y / 2 - 50, cam_size.y / 2 + 50)
+	
+	var enemy = clown.instantiate(PackedScene.GEN_EDIT_STATE_MAIN)
+	enemy.global_position = spawn_position
+	add_child(enemy)
+	
+
+
+func _on_timer_timeout():
+	spawn_enemy_at_camera_edge()
