@@ -1,10 +1,10 @@
 class_name Player
 extends CharacterBody2D
 
-const speed = 300.0
+const speed = 100.0
 const friction = 0.35
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	var direction := Vector2(
 		Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left"),
 		Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
