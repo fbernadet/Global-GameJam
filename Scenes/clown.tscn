@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bopqga6hgsgg8"]
+[gd_scene load_steps=6 format=3 uid="uid://bopqga6hgsgg8"]
 
 [ext_resource type="Texture2D" uid="uid://rphdlhwfeo7b" path="res://Tiles/tile_0307.png" id="1_jwcl4"]
 [ext_resource type="Script" path="res://Scripts/clown.gd" id="1_lljae"]
@@ -9,7 +9,9 @@ size = Vector2(8, 8)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_umrsi"]
 size = Vector2(8, 8)
 
-[node name="Clown" type="CharacterBody2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_wk1om"]
+
+[node name="Clown" type="CharacterBody2D" groups=["clown"]]
 script = ExtResource("1_lljae")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -24,3 +26,12 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 shape = SubResource("RectangleShape2D_umrsi")
+
+[node name="DetectionZone" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionZone"]
+shape = SubResource("CircleShape2D_wk1om")
+debug_color = Color(0, 0.65098, 0.00392157, 0.419608)
+
+[connection signal="body_entered" from="DetectionZone" to="." method="_on_detection_zone_body_entered"]
+[connection signal="body_exited" from="DetectionZone" to="." method="_on_detection_zone_body_exited"]
