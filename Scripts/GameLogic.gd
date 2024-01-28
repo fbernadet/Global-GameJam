@@ -32,7 +32,7 @@ func update_day_label():
 func _physics_process(_delta):
 	if already_dialogue == false:
 		already_dialogue = true
-		get_tree().paused = true
+		get_tree().paused = false
 		var resource = load("res://Dialogues/main.dialogue")
 		DialogueManager.show_dialogue_balloon(resource, "start")
 		
