@@ -24,28 +24,25 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-
+	pass
 	
-	if Input.is_action_pressed("fire") and !is_shooting :
-		
+func jetPistol(health:HealthComponent):
+	#if Input.is_action_pressed("fire") and !is_shooting :
+		health.take_damage(5)
 		timer.start()
-		if maCollisionShape != null:
-			maCollisionShape.set_deferred("disabled", false)
+		
 		is_shooting = true
 		visible=true
+		if maCollisionShape != null:
+			maCollisionShape.set_deferred("disabled", false)
 		particles.emitting = true
 		
-		
-	elif !Input.is_action_pressed("fire") and is_shooting:
-		if maCollisionShape != null:
-			maCollisionShape.set_deferred("disabled", true)
-		is_shooting = false
-		visible=false
-		particles.emitting = false
-		particles.restart()
-	
-	elif timer.time_left<0.2:
+func stopPistol():	
+	if timer.time_left<0.2:
 		maCollisionShape.set_deferred("disabled", true)
+		particles.restart()
+		visible=false
+		is_shooting = false
 
 		
 

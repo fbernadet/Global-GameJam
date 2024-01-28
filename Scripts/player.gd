@@ -2,13 +2,18 @@ class_name Player
 extends CharacterBody2D
 @onready var _animated_sprite = $AnimatedSprite2D
 @onready var game_over_label = $Camera2D/GameOverLabel
+@onready var  FleurBonus = $CenterMarker/FleurBonus
+@onready var HealthComponent=$HealthComponent
+
 const speed = 100.0
 const friction = 0.35
+
 
 signal damage_taken_relay(hp)
 
 func _ready():
 	game_over_label.visible = false
+	
 
 func _physics_process(_delta):
 	var direction := Vector2(
@@ -38,6 +43,12 @@ func _process(_delta):
 		
 	if Input.is_action_pressed("ui_left") == false && Input.is_action_pressed("ui_right") == false && Input.is_action_pressed("ui_up") == false && Input.is_action_pressed("ui_down") == false:
 		_animated_sprite.stop()
+		
+	if FleurBonus!=null:
+		if Input.is_action_pressed("fire") and !FleurBonus.is_shooting:
+			FleurBonus.jetPistol(HealthComponent)
+		else:
+			FleurBonus.stopPistol()
 
 func _on_briefcase_body_entered(body):
 	var clown = body as Clown
