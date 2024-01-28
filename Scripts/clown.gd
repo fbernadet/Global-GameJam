@@ -12,9 +12,11 @@ var is_bouncing = false
 var is_stun = false
 @onready var bouce_timer = $BounceTimer
 @onready var stun_timer = $StunTimer
+@onready var _animated_sprite = $AnimatedSprite2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	
 	var player_list = get_tree().get_nodes_in_group("player")
 	if not player_list.is_empty():
 		player = player_list[0]
@@ -25,6 +27,11 @@ func _physics_process(delta):
 		
 		if player != null:
 			direction = (player.position - position)
+			if direction.x <= 0:
+				_animated_sprite.play("Run_gauche")
+			else:
+				_animated_sprite.play("Run_droite")
+			
 		
 		for c in adjacent_clowns:
 			direction += 0.6 * (position - c.position)
@@ -58,3 +65,12 @@ func _on_bounce_timer_timeout():
 func _on_stun_timer_timeout():
 	is_stun = false
 	speed = NORMAL_SPEED
+	
+func _on_hit_enemy(area):
+	var enemy = area.get_parent()
+	if enemy:
+		queue_free()
+	
+
+func _on_hurtbox_area_entered(area):
+	queue_free()

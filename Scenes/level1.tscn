@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dtwwwda6vfjko"]
+[gd_scene load_steps=12 format=3 uid="uid://dtwwwda6vfjko"]
 
 [ext_resource type="PackedScene" uid="uid://drv10itu2b043" path="res://Scenes/tile_map.tscn" id="1_f8tar"]
 [ext_resource type="Script" path="res://Scripts/GameLogic.gd" id="1_porm0"]
@@ -12,6 +12,21 @@ size = Vector2(56, 20.5)
 shader = ExtResource("4_5kork")
 shader_parameter/hp_percent = null
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uq2gh"]
+size = Vector2(188, 116)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l070x"]
+size = Vector2(1238, 31)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qxa6f"]
+size = Vector2(1186, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q7drk"]
+size = Vector2(38, 717)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dy5fo"]
+size = Vector2(32, 675)
+
 [node name="Level1" type="Node2D"]
 
 [node name="TileMap" parent="." instance=ExtResource("1_f8tar")]
@@ -23,8 +38,9 @@ script = ExtResource("1_porm0")
 wait_time = 0.5
 autostart = true
 
-[node name="Player" parent="." instance=ExtResource("2_lgkyn")]
+[node name="Player" parent="." node_paths=PackedStringArray("marker") instance=ExtResource("2_lgkyn")]
 position = Vector2(312, 442)
+marker = NodePath("../GoalMarker")
 
 [node name="Goal" type="Area2D" parent="."]
 position = Vector2(1060, 94)
@@ -38,11 +54,45 @@ position = Vector2(148, 638)
 
 [node name="ColorRect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_5krcb")
-offset_left = -1.0
-offset_top = -1.0
-offset_right = 1154.0
-offset_bottom = 647.0
+offset_left = -261.0
+offset_top = -239.0
+offset_right = 1414.0
+offset_bottom = 873.0
+
+[node name="GoalMarker" type="Marker2D" parent="."]
+position = Vector2(1061, 94)
+
+[node name="SpawnZone" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnZone"]
+position = Vector2(152, 590)
+shape = SubResource("RectangleShape2D_uq2gh")
+
+[node name="WorldBorders" type="StaticBody2D" parent="."]
+collision_layer = 32768
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBorders"]
+position = Vector2(567, 659)
+shape = SubResource("RectangleShape2D_l070x")
+debug_color = Color(1, 0, 0.101961, 0.419608)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="WorldBorders"]
+position = Vector2(583, -4)
+shape = SubResource("RectangleShape2D_qxa6f")
+debug_color = Color(0.996078, 0, 0.168627, 0.419608)
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="WorldBorders"]
+position = Vector2(-17, 321)
+shape = SubResource("RectangleShape2D_q7drk")
+debug_color = Color(1, 0, 0.145098, 0.419608)
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="WorldBorders"]
+position = Vector2(1166, 330)
+shape = SubResource("RectangleShape2D_dy5fo")
+debug_color = Color(1, 0, 0.105882, 0.419608)
 
 [connection signal="timeout" from="GameLogic/Timer" to="GameLogic" method="_on_timer_timeout"]
 [connection signal="damage_taken_relay" from="Player" to="GameLogic" method="_on_player_damage_taken_relay"]
 [connection signal="body_entered" from="Goal" to="GameLogic" method="_on_goal_body_entered"]
+[connection signal="body_exited" from="SpawnZone" to="GameLogic" method="_on_spawn_zone_body_exited"]

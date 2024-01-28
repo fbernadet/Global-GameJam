@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://6tshwktv4jo4"]
+[gd_scene load_steps=21 format=3 uid="uid://6tshwktv4jo4"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_svfv4"]
 [ext_resource type="Script" path="res://Scripts/HealthComponent.gd" id="2_r5ydn"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://cm1yjkf7ybcva" path="res://Tiles/Bros/bro_arriere_move_2.png" id="8_h6ev8"]
 [ext_resource type="Texture2D" uid="uid://k4h57piflql6" path="res://Tiles/progress/ohSpQzs.jpg" id="9_xlgc5"]
 [ext_resource type="PackedScene" uid="uid://npuwybt6ea8k" path="res://Scenes/fleur_bonus.tscn" id="11_mctdj"]
+[ext_resource type="Texture2D" uid="uid://n6eypr8o8pg2" path="res://Tiles/Arrow/Indicator_arrow.png" id="13_yhqhg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tfvgx"]
 size = Vector2(8, 8)
@@ -66,7 +67,24 @@ curve = SubResource("Curve_3g5ks")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8wryj"]
 size = Vector2(2, 6)
 
+[sub_resource type="GDScript" id="GDScript_p7dy0"]
+script/source = "extends Marker2D
+@export var marker: Marker2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+"
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
+collision_layer = 32769
+collision_mask = 32769
 script = ExtResource("1_svfv4")
 
 [node name="HealthComponent" type="Node2D" parent="."]
@@ -140,6 +158,16 @@ texture = ExtResource("3_y5igb")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CenterMarker/Briefcase"]
 shape = SubResource("RectangleShape2D_8wryj")
 debug_color = Color(0.866667, 0, 0.854902, 0.419608)
+
+[node name="GoalCenterMarker" type="Marker2D" parent="." node_paths=PackedStringArray("marker")]
+script = SubResource("GDScript_p7dy0")
+marker = NodePath(".")
+
+[node name="IndicatorArrow" type="Sprite2D" parent="GoalCenterMarker"]
+position = Vector2(18, 0)
+rotation = 4.71239
+scale = Vector2(0.0725, 0.075)
+texture = ExtResource("13_yhqhg")
 
 [connection signal="damage_taken" from="HealthComponent" to="." method="_on_health_component_damage_taken"]
 [connection signal="is_dead" from="HealthComponent" to="." method="_on_health_component_is_dead"]

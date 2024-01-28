@@ -1,16 +1,49 @@
-[gd_scene load_steps=7 format=3 uid="uid://bopqga6hgsgg8"]
+[gd_scene load_steps=14 format=3 uid="uid://bopqga6hgsgg8"]
 
 [ext_resource type="Texture2D" uid="uid://rphdlhwfeo7b" path="res://Tiles/tile_0307.png" id="1_jwcl4"]
 [ext_resource type="Script" path="res://Scripts/clown.gd" id="1_lljae"]
-[ext_resource type="Script" path="res://Scripts/HitBox.gd" id="3_12yq8"]
+[ext_resource type="Script" path="res://Scripts/HitBox.gd" id="3_1ikue"]
+[ext_resource type="Texture2D" uid="uid://dtskkm6cic7jb" path="res://Tiles/Clowns/Clown1_droite.png" id="3_ahiw2"]
+[ext_resource type="Script" path="res://Scripts/water_collision.gd" id="3_wb0vo"]
+[ext_resource type="Texture2D" uid="uid://cbxm2mmdhemfi" path="res://Tiles/Clowns/Clown1_droite_move_1.png" id="4_xro6b"]
+[ext_resource type="Texture2D" uid="uid://n61lm1041gi5" path="res://Tiles/Clowns/Clown1_gauche.png" id="5_0vrll"]
+[ext_resource type="Texture2D" uid="uid://dd0wb1onulhea" path="res://Tiles/Clowns/Clown1_gauche_move_1.png" id="6_nnd1s"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3s7k2"]
 size = Vector2(8, 8)
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_mb27t"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_ahiw2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_xro6b")
+}],
+"loop": true,
+"name": &"Run_droite",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_0vrll")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_nnd1s")
+}],
+"loop": true,
+"name": &"Run_gauche",
+"speed": 5.0
+}]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_umrsi"]
-size = Vector2(10, 10)
+size = Vector2(8, 8)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wk1om"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pws42"]
+size = Vector2(8, 8)
 
 [node name="Clown" type="CharacterBody2D" groups=["clown"]]
 collision_layer = 12
@@ -20,19 +53,26 @@ script = ExtResource("1_lljae")
 shape = SubResource("RectangleShape2D_3s7k2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 texture = ExtResource("1_jwcl4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_mb27t")
+animation = &"Run_gauche"
+frame = 1
+frame_progress = 0.754896
 
 [node name="HitBox" type="Area2D" parent="."]
 collision_layer = 2
 collision_mask = 0
-script = ExtResource("3_12yq8")
+script = ExtResource("3_1ikue")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 shape = SubResource("RectangleShape2D_umrsi")
+script = ExtResource("3_wb0vo")
 
 [node name="DetectionZone" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionZone"]
 shape = SubResource("CircleShape2D_wk1om")
@@ -45,7 +85,15 @@ one_shot = true
 [node name="StunTimer" type="Timer" parent="."]
 one_shot = true
 
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("RectangleShape2D_pws42")
+
 [connection signal="body_entered" from="DetectionZone" to="." method="_on_detection_zone_body_entered"]
 [connection signal="body_exited" from="DetectionZone" to="." method="_on_detection_zone_body_exited"]
 [connection signal="timeout" from="BounceTimer" to="." method="_on_bounce_timer_timeout"]
 [connection signal="timeout" from="StunTimer" to="." method="_on_stun_timer_timeout"]
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
