@@ -15,6 +15,7 @@ var is_stun = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	
 	var player_list = get_tree().get_nodes_in_group("player")
 	if not player_list.is_empty():
 		player = player_list[0]
@@ -58,3 +59,12 @@ func _on_bounce_timer_timeout():
 func _on_stun_timer_timeout():
 	is_stun = false
 	speed = NORMAL_SPEED
+	
+func _on_hit_enemy(area):
+	var enemy = area.get_parent()
+	if enemy:
+		queue_free()
+	
+
+func _on_hurtbox_area_entered(area):
+	queue_free()
