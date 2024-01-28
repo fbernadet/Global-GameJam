@@ -6,6 +6,7 @@ extends Node2D
 @onready var colorRect = $"../ColorRect"
 @onready var SpawnTimer = $Timer
 @onready var clown = preload("res://Scenes/clown.tscn")
+@onready var clown2 = preload("res://Scenes/clown2.tscn")
 var day = 0
 var already_dialogue = false
 
@@ -75,9 +76,12 @@ func spawn_enemy_at_camera_edge():
 	spawn_position.x += randf_range(-cam_size.x / 2 - 50, cam_size.x / 2 + 50)
 	spawn_position.y += randf_range(-cam_size.y / 2 - 50, cam_size.y / 2 + 50)
 	
-	var enemy = clown.instantiate(PackedScene.GEN_EDIT_STATE_DISABLED)
+	var enemy = clown.instantiate(PackedScene.GEN_EDIT_STATE_MAIN)
+	var enemy2 = clown2.instantiate(PackedScene.GEN_EDIT_STATE_MAIN)
 	enemy.global_position = spawn_position
+	#enemy2.global_position = spawn_position + Vector2(5,5)
 	add_child(enemy)
+	add_child(enemy2)
 	
 func free_all_clowns():
 	var nodes_in_group = get_tree().get_nodes_in_group("clown")

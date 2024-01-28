@@ -12,7 +12,7 @@ var is_bouncing = false
 var is_stun = false
 @onready var bouce_timer = $BounceTimer
 @onready var stun_timer = $StunTimer
-@onready var _animated_sprite = $AnimatedSprite2D
+@onready var _animated_sprite = $clown1_animatedSprite2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

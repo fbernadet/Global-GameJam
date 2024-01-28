@@ -15,7 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://n6eypr8o8pg2" path="res://Tiles/Arrow/Indicator_arrow.png" id="13_yhqhg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tfvgx"]
-size = Vector2(4, 4)
+size = Vector2(8, 8)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qq1lm"]
 animations = [{
@@ -91,7 +91,6 @@ script = ExtResource("1_svfv4")
 script = ExtResource("2_r5ydn")
 
 [node name="PlayerShape" type="CollisionShape2D" parent="."]
-position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_tfvgx")
 
 [node name="BroAvant" type="Sprite2D" parent="."]
