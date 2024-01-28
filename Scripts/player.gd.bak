@@ -2,10 +2,14 @@ class_name Player
 extends CharacterBody2D
 @onready var _animated_sprite = $AnimatedSprite2D
 @onready var game_over_label = $Camera2D/GameOverLabel
+<<<<<<< Updated upstream
 @onready var  FleurBonus = $CenterMarker/FleurBonus
 @onready var HealthComponent=$HealthComponent
+
+=======
 @export var marker: Marker2D
 @onready var goalCenterMarker = $GoalCenterMarker
+>>>>>>> Stashed changes
 const speed = 100.0
 const friction = 0.35
 
