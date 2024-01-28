@@ -1,12 +1,41 @@
-[gd_scene load_steps=9 format=3 uid="uid://bopqga6hgsgg8"]
+[gd_scene load_steps=14 format=3 uid="uid://bopqga6hgsgg8"]
 
 [ext_resource type="Texture2D" uid="uid://rphdlhwfeo7b" path="res://Tiles/tile_0307.png" id="1_jwcl4"]
 [ext_resource type="Script" path="res://Scripts/clown.gd" id="1_lljae"]
 [ext_resource type="Script" path="res://Scripts/HitBox.gd" id="3_1ikue"]
+[ext_resource type="Texture2D" uid="uid://dtskkm6cic7jb" path="res://Tiles/Clowns/Clown1_droite.png" id="3_ahiw2"]
 [ext_resource type="Script" path="res://Scripts/water_collision.gd" id="3_wb0vo"]
+[ext_resource type="Texture2D" uid="uid://cbxm2mmdhemfi" path="res://Tiles/Clowns/Clown1_droite_move_1.png" id="4_xro6b"]
+[ext_resource type="Texture2D" uid="uid://n61lm1041gi5" path="res://Tiles/Clowns/Clown1_gauche.png" id="5_0vrll"]
+[ext_resource type="Texture2D" uid="uid://dd0wb1onulhea" path="res://Tiles/Clowns/Clown1_gauche_move_1.png" id="6_nnd1s"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3s7k2"]
 size = Vector2(8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mb27t"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_ahiw2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_xro6b")
+}],
+"loop": true,
+"name": &"Run_droite",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_0vrll")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_nnd1s")
+}],
+"loop": true,
+"name": &"Run_gauche",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_umrsi"]
 size = Vector2(8, 8)
@@ -24,7 +53,15 @@ script = ExtResource("1_lljae")
 shape = SubResource("RectangleShape2D_3s7k2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 texture = ExtResource("1_jwcl4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_mb27t")
+animation = &"Run_gauche"
+frame = 1
+frame_progress = 0.754896
 
 [node name="HitBox" type="Area2D" parent="."]
 collision_layer = 2
