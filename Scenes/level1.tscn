@@ -49,15 +49,16 @@ position = Vector2(1060, 94)
 shape = SubResource("RectangleShape2D_vonj5")
 debug_color = Color(0.619608, 0.533333, 0, 0.419608)
 
-[node name="Start" type="Marker2D" parent="."]
-position = Vector2(148, 638)
-
 [node name="ColorRect" type="ColorRect" parent="."]
+z_index = 20
 material = SubResource("ShaderMaterial_5krcb")
-offset_left = -261.0
-offset_top = -239.0
-offset_right = 1414.0
-offset_bottom = 873.0
+offset_left = -234.0
+offset_top = -244.0
+offset_right = 1441.0
+offset_bottom = 868.0
+
+[node name="Start" type="Marker2D" parent="."]
+position = Vector2(213, 636)
 
 [node name="GoalMarker" type="Marker2D" parent="."]
 position = Vector2(1061, 94)
@@ -65,7 +66,7 @@ position = Vector2(1061, 94)
 [node name="SpawnZone" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnZone"]
-position = Vector2(152, 590)
+position = Vector2(145, 585)
 shape = SubResource("RectangleShape2D_uq2gh")
 
 [node name="WorldBorders" type="StaticBody2D" parent="."]

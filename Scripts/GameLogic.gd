@@ -75,7 +75,7 @@ func spawn_enemy_at_camera_edge():
 	spawn_position.x += randf_range(-cam_size.x / 2 - 50, cam_size.x / 2 + 50)
 	spawn_position.y += randf_range(-cam_size.y / 2 - 50, cam_size.y / 2 + 50)
 	
-	var enemy = clown.instantiate(PackedScene.GEN_EDIT_STATE_MAIN)
+	var enemy = clown.instantiate(PackedScene.GEN_EDIT_STATE_DISABLED)
 	enemy.global_position = spawn_position
 	add_child(enemy)
 	
