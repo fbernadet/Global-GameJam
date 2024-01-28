@@ -23,8 +23,9 @@ script = ExtResource("1_porm0")
 wait_time = 0.5
 autostart = true
 
-[node name="Player" parent="." instance=ExtResource("2_lgkyn")]
+[node name="Player" parent="." node_paths=PackedStringArray("marker") instance=ExtResource("2_lgkyn")]
 position = Vector2(312, 442)
+marker = NodePath("../GoalMarker")
 
 [node name="Goal" type="Area2D" parent="."]
 position = Vector2(1060, 94)
@@ -42,6 +43,9 @@ offset_left = -1.0
 offset_top = -1.0
 offset_right = 1154.0
 offset_bottom = 647.0
+
+[node name="GoalMarker" type="Marker2D" parent="."]
+position = Vector2(1061, 94)
 
 [connection signal="timeout" from="GameLogic/Timer" to="GameLogic" method="_on_timer_timeout"]
 [connection signal="damage_taken_relay" from="Player" to="GameLogic" method="_on_player_damage_taken_relay"]
