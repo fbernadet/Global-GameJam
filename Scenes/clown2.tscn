@@ -16,13 +16,13 @@
 [ext_resource type="Texture2D" uid="uid://igakji0r78w7" path="res://Tiles/Clowns/Clown2_gauche_move_5.png" id="18_havga"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3s7k2"]
-size = Vector2(8, 8)
+size = Vector2(14, 11)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_umrsi"]
-size = Vector2(19, 20.5)
+size = Vector2(24, 30)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pws42"]
-size = Vector2(8, 8)
+size = Vector2(30, 38)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_t64iy"]
 animations = [{
@@ -72,6 +72,7 @@ collision_layer = 12
 script = ExtResource("1_t2rkr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-5, 14.5)
 shape = SubResource("RectangleShape2D_3s7k2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -82,9 +83,10 @@ texture = ExtResource("2_ovke2")
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("7_nlwta")
+damage = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
-position = Vector2(-2.5, -2.75)
+position = Vector2(-5, 5)
 shape = SubResource("RectangleShape2D_umrsi")
 script = ExtResource("8_duhdl")
 
@@ -100,11 +102,12 @@ collision_layer = 0
 collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(-8, 1)
 shape = SubResource("RectangleShape2D_pws42")
 
 [node name="clown2_animatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(1, -5)
-scale = Vector2(0.25, 0.25)
+scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_t64iy")
 animation = &"Run2_Gauche"
 

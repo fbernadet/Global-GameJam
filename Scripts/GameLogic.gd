@@ -1,3 +1,4 @@
+class_name Level
 extends Node2D
 
 @onready var player = $"../Player"
@@ -9,6 +10,7 @@ extends Node2D
 @onready var clown2 = preload("res://Scenes/clown2.tscn")
 var day = 0
 var already_dialogue = false
+var nb_ennemy: int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -19,9 +21,9 @@ func _ready():
 	
 func updateTimer():
 	SpawnTimer.stop()
-	print(float(easeInInverseXSquare(day)))
+	# print(float(easeInInverseXSquare(day)))
 	SpawnTimer.wait_time = float(easeInInverseXSquare(day))
-	print(SpawnTimer.wait_time)
+	# print(SpawnTimer.wait_time)
 	SpawnTimer.start()
 	
 func change_filter_value(value : float):
@@ -44,14 +46,13 @@ func _physics_process(_delta):
 		already_dialogue = true
 		var resource = load("res://Dialogues/main.dialogue")
 		DialogueManager.show_dialogue_balloon(resource, "start")
-		
 
 func _on_goal_body_entered(body):
 	if body.is_in_group("player"):
 		print("Goal Acheived")
 		# Logique de fin de jeux
 		next_day()
-		
+
 func next_day():
 	# TODO transmettre l'information du jour à l'UI
 	# TODO transition un peu smooth pour le jour suivant
@@ -66,23 +67,31 @@ func next_day():
 func initial_dialogue():
 	var resource = load("res://Dialogues/main.dialogue")
 	DialogueManager.show_dialogue_balloon(resource, "start")
-	
+
 func spawn_enemy_at_camera_edge():
+	if (nb_ennemy >= 250):
+		return
+	
 	var camera = get_viewport().get_camera_2d()
 	var cam_pos = camera.global_position
 	var cam_size = camera.get_viewport_rect().size
 	
+	var proba = randf()
 	var spawn_position = cam_pos
 	spawn_position.x += randf_range(-cam_size.x / 2 - 50, cam_size.x / 2 + 50)
 	spawn_position.y += randf_range(-cam_size.y / 2 - 50, cam_size.y / 2 + 50)
 	
-	var enemy = clown.instantiate(PackedScene.GEN_EDIT_STATE_MAIN)
-	var enemy2 = clown2.instantiate(PackedScene.GEN_EDIT_STATE_MAIN)
+	var enemy
+	if proba < easeInCubic(float(day)):
+		enemy = clown2.instantiate(PackedScene.GEN_EDIT_STATE_DISABLED)
+	else:
+		enemy = clown.instantiate(PackedScene.GEN_EDIT_STATE_DISABLED)
+
 	enemy.global_position = spawn_position
-	#enemy2.global_position = spawn_position + Vector2(5,5)
 	add_child(enemy)
-	add_child(enemy2)
-	
+	nb_ennemy += 1
+	print (nb_ennemy)
+
 func free_all_clowns():
 	var nodes_in_group = get_tree().get_nodes_in_group("clown")
 	for node in nodes_in_group:
@@ -93,13 +102,23 @@ func _on_timer_timeout():
 
 func _on_player_damage_taken_relay(hp):
 	var hp_value = float(hp)/100.
-	print(hp_value)
+	# print(hp_value)
 	change_filter_value(hp_value)
 
 func _on_spawn_zone_body_exited(player : Player):
 	player.set_is_tuto(false)
-	
+
 func easeInInverseXSquare(x :float):
 	if x<=0:
 		return 10000
-	return float(1/(x*x))
+	var val = float(1./x)
+	return val
+
+func easeInCubic(x : float):
+	x = (1. * x) / 40
+	var value =  -(cos(PI * x)-1.) / 2.
+	return min(value, 0.15)
+
+func _unhandled_input(event):
+	if event.is_action_pressed("special"):
+		next_day()
