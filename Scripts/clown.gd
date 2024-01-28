@@ -12,6 +12,7 @@ var is_bouncing = false
 var is_stun = false
 @onready var bouce_timer = $BounceTimer
 @onready var stun_timer = $StunTimer
+@onready var _animated_sprite = $AnimatedSprite2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -26,6 +27,11 @@ func _physics_process(delta):
 		
 		if player != null:
 			direction = (player.position - position)
+			if direction.x <= 0:
+				_animated_sprite.play("Run_gauche")
+			else:
+				_animated_sprite.play("Run_droite")
+			
 		
 		for c in adjacent_clowns:
 			direction += 0.6 * (position - c.position)
