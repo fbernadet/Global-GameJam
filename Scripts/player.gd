@@ -8,6 +8,7 @@ extends CharacterBody2D
 @onready var goalCenterMarker = $GoalCenterMarker
 const speed = 100.0
 const friction = 0.35
+var is_tuto = true
 
 
 signal damage_taken_relay(hp)
@@ -46,12 +47,16 @@ func _process(_delta):
 		
 	if Input.is_action_pressed("ui_left") == false && Input.is_action_pressed("ui_right") == false && Input.is_action_pressed("ui_up") == false && Input.is_action_pressed("ui_down") == false:
 		_animated_sprite.stop()
-		
-	if FleurBonus!=null:
-		if Input.is_action_pressed("fire") and !FleurBonus.is_shooting:
-			FleurBonus.jetPistol(HealthComponent)
-		else:
-			FleurBonus.stopPistol()
+	
+	if is_tuto==false: 
+		if FleurBonus!=null:
+			if Input.is_action_pressed("fire") and !FleurBonus.is_shooting:
+				FleurBonus.jetPistol(HealthComponent)
+			else:
+				FleurBonus.stopPistol()
+				
+func set_is_tuto(value : bool):
+	is_tuto = value
 
 func _on_briefcase_body_entered(body):
 	var clown = body as Clown

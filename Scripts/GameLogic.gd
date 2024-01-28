@@ -32,7 +32,6 @@ func update_day_label():
 func _physics_process(_delta):
 	if already_dialogue == false:
 		already_dialogue = true
-		get_tree().paused = false
 		var resource = load("res://Dialogues/main.dialogue")
 		DialogueManager.show_dialogue_balloon(resource, "start")
 		
@@ -46,6 +45,7 @@ func _on_goal_body_entered(body):
 func next_day():
 	# TODO transmettre l'information du jour à l'UI
 	# TODO transition un peu smooth pour le jour suivant
+	player.set_is_tuto(false)	
 	player.position = start.position
 	day += 1
 	update_day_label()
@@ -79,3 +79,6 @@ func _on_player_damage_taken_relay(hp):
 	var hp_value = float(hp)/100.
 	print(hp_value)
 	change_filter_value(hp_value)
+
+func _on_spawn_zone_body_exited(player : Player):
+	player.set_is_tuto(false)

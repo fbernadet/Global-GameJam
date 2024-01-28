@@ -83,6 +83,8 @@ func _process(delta):
 "
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
+collision_layer = 32769
+collision_mask = 32769
 script = ExtResource("1_svfv4")
 
 [node name="HealthComponent" type="Node2D" parent="."]
