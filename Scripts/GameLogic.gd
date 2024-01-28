@@ -6,6 +6,7 @@ extends Node2D
 @onready var colorRect = $"../ColorRect"
 @onready var clown = preload("res://Scenes/clown.tscn")
 var day = 0
+var already_dialogue = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -29,7 +30,12 @@ func update_day_label():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta):
-	pass
+	if already_dialogue == false:
+		already_dialogue = true
+		get_tree().paused = true
+		var resource = load("res://Dialogues/main.dialogue")
+		DialogueManager.show_dialogue_balloon(resource, "start")
+		
 
 func _on_goal_body_entered(body):
 	if body.is_in_group("player"):
@@ -37,7 +43,6 @@ func _on_goal_body_entered(body):
 		# Logique de fin de jeux
 		next_day()
 		
-	
 func next_day():
 	# TODO transmettre l'information du jour à l'UI
 	# TODO transition un peu smooth pour le jour suivant
@@ -45,6 +50,10 @@ func next_day():
 	day += 1
 	update_day_label()
 	print("jour = ", day)
+
+func initial_dialogue():
+	var resource = load("res://Dialogues/main.dialogue")
+	DialogueManager.show_dialogue_balloon(resource, "start")
 	
 func spawn_enemy_at_camera_edge():
 	var camera = get_viewport().get_camera_2d()

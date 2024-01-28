@@ -1,0 +1,147 @@
+[gd_scene load_steps=19 format=3 uid="uid://6tshwktv4jo4"]
+
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_svfv4"]
+[ext_resource type="Script" path="res://Scripts/HealthComponent.gd" id="2_r5ydn"]
+[ext_resource type="Script" path="res://Scripts/CenterMarker.gd" id="3_kvhq2"]
+[ext_resource type="Texture2D" uid="uid://dbvpd3k0yeciu" path="res://Tiles/Bros/bro_avant.png" id="3_w0yn8"]
+[ext_resource type="Texture2D" uid="uid://tujak7ibid8u" path="res://Tiles/tile_0330.png" id="3_y5igb"]
+[ext_resource type="Texture2D" uid="uid://dsvcifok6f57b" path="res://Tiles/Bros/bro_arriere.png" id="6_d73k8"]
+[ext_resource type="Texture2D" uid="uid://xbnfdd7wf8ob" path="res://Tiles/Bros/bro_avant_move_1.png" id="6_qf2lj"]
+[ext_resource type="Texture2D" uid="uid://mucs0gc5mk8x" path="res://Tiles/Bros/bro_arriere_move_1.png" id="7_o7qw8"]
+[ext_resource type="Texture2D" uid="uid://nfxna5lbsmrw" path="res://Tiles/Bros/bro_avant_move_2.png" id="7_o08mr"]
+[ext_resource type="Texture2D" uid="uid://cm1yjkf7ybcva" path="res://Tiles/Bros/bro_arriere_move_2.png" id="8_h6ev8"]
+[ext_resource type="Texture2D" uid="uid://k4h57piflql6" path="res://Tiles/progress/ohSpQzs.jpg" id="9_xlgc5"]
+[ext_resource type="PackedScene" uid="uid://npuwybt6ea8k" path="res://Scenes/fleur_bonus.tscn" id="11_mctdj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tfvgx"]
+size = Vector2(8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qq1lm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_d73k8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_o7qw8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_d73k8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_h6ev8")
+}],
+"loop": true,
+"name": &"run_arriere",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_w0yn8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_qf2lj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_w0yn8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_o08mr")
+}],
+"loop": true,
+"name": &"run_avant",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4tddr"]
+size = Vector2(6, 8)
+
+[sub_resource type="Curve" id="Curve_3g5ks"]
+_data = [Vector2(0.668478, 0.197802), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="CurveTexture" id="CurveTexture_xq1dw"]
+curve = SubResource("Curve_3g5ks")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8wryj"]
+size = Vector2(2, 6)
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+script = ExtResource("1_svfv4")
+
+[node name="HealthComponent" type="Node2D" parent="."]
+script = ExtResource("2_r5ydn")
+
+[node name="PlayerShape" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_tfvgx")
+
+[node name="BroAvant" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_w0yn8")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_qq1lm")
+animation = &"run_avant"
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("RectangleShape2D_4tddr")
+debug_color = Color(0.976471, 0.129412, 0.188235, 0.419608)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(5, 5)
+
+[node name="DayLabel" type="Label" parent="Camera2D"]
+offset_left = -114.0
+offset_top = -65.0
+offset_right = -66.0
+offset_bottom = -51.0
+theme_override_font_sizes/font_size = 10
+text = "Day 1"
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="Camera2D"]
+offset_left = -60.0
+offset_top = 57.0
+offset_right = 61.0
+offset_bottom = 63.0
+value = 100.0
+rounded = true
+nine_patch_stretch = true
+texture_under = ExtResource("9_xlgc5")
+texture_progress = SubResource("CurveTexture_xq1dw")
+
+[node name="GameOverLabel" type="RichTextLabel" parent="Camera2D"]
+offset_left = -33.0
+offset_top = -44.0
+offset_right = 86.0
+offset_bottom = 13.0
+text = "You got clowned"
+
+[node name="CenterMarker" type="Marker2D" parent="."]
+script = ExtResource("3_kvhq2")
+
+[node name="FleurBonus" parent="CenterMarker" instance=ExtResource("11_mctdj")]
+position = Vector2(7, 0)
+
+[node name="Briefcase" type="Area2D" parent="CenterMarker"]
+position = Vector2(5, 0)
+collision_layer = 0
+collision_mask = 4
+
+[node name="BriefcaseSprite" type="Sprite2D" parent="CenterMarker/Briefcase"]
+scale = Vector2(0.3125, 0.625)
+texture = ExtResource("3_y5igb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CenterMarker/Briefcase"]
+shape = SubResource("RectangleShape2D_8wryj")
+debug_color = Color(0.866667, 0, 0.854902, 0.419608)
+
+[connection signal="damage_taken" from="HealthComponent" to="." method="_on_health_component_damage_taken"]
+[connection signal="is_dead" from="HealthComponent" to="." method="_on_health_component_is_dead"]
+[connection signal="area_entered" from="Hurtbox" to="HealthComponent" method="_on_hurtbox_area_entered"]
+[connection signal="body_entered" from="CenterMarker/Briefcase" to="." method="_on_briefcase_body_entered"]
